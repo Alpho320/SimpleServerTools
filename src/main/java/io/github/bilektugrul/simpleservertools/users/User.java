@@ -22,13 +22,16 @@ public class User {
     private final @NotNull SST plugin;
     private final @NotNull UUID uuid;
     private final @NotNull String name;
-    private @NotNull UserState state;
+
     private boolean isGod;
     private boolean isAfk;
+
+    private @NotNull UserState state;
     private final @NotNull YamlConfiguration data;
 
     private final @NotNull List<String> tpaBlockedPlayers = new ArrayList<>();
     private final @NotNull List<String> msgBlockedPlayers = new ArrayList<>();
+
     private final @NotNull Set<Home> homes = new HashSet<>();
 
     public User(YamlConfiguration data, @NotNull UUID uuid, @NotNull String name, @NotNull SST plugin) {
