@@ -74,32 +74,23 @@ public class SST extends JavaPlugin {
     @Override
     public void onEnable() {
         long start = System.currentTimeMillis();
+
         saveDefaultConfig();
         logger = getLogger();
+
         logger.info(ChatColor.GREEN + "SimpleServerTools v" + getDescription().getVersion() + " is being enabled. Thanks for using SST!");
 
         registerManagers();
-
-        for (Player looped : Bukkit.getOnlinePlayers()) {
-            userManager.loadUser(looped);
-        }
+        Bukkit.getOnlinePlayers().forEach(player -> userManager.loadUser(player));
 
         pluginManager.registerEvents(new PlayerListener(this), this);
-
         registerCommands();
 
         reload(true);
-        if (Utils.getBoolean("auto-save-users")) {
-            asyncUserSaveThread = new AsyncUserSaveThread(this);
-        }
-        if (Utils.getBoolean("metrics-enabled")) {
-            logger.info(ChatColor.GREEN + "Enabling metrics...");
-            new Metrics(this, 11344);
-        }
-
+        startTasks();
         checkUpdate();
 
-        logger.log(Level.INFO, ChatColor.GREEN + "Enabling process is done, enjoy! " + ChatColor.AQUA + "{0} ms", System.currentTimeMillis() - start);
+        logger.log(Level.INFO, ChatColor.GREEN + "Enabling process is done, enjoy! " + ChatColor.AQUA + Utils.took(start));
     }
 
     @Override
@@ -114,6 +105,21 @@ public class SST extends JavaPlugin {
         spawnManager.saveSpawn();
         maintenanceManager.save();
         logger.info(ChatColor.GREEN + "Everything has been saved.");
+    }
+
+    public void startTasks() {
+        if (Utils.getBoolean("auto-save-users")) startUserSaveThread();
+        if (Utils.getBoolean("metrics-enabled")) startMetrics();
+    }
+
+    public void startUserSaveThread() {
+        asyncUserSaveThread = new AsyncUserSaveThread(this);
+    }
+
+    public void startMetrics() {
+        logger.info(ChatColor.GREEN + "Enabling metrics...");
+        new Metrics(this, 11344);
+        
     }
 
     private void registerManagers() {
@@ -136,18 +142,30 @@ public class SST extends JavaPlugin {
         vanishManager = new VanishManager();
         spyManager = new SpyManager();
 
+        announcementManager = new AnnouncementManager(this);
+
+        checkExternalPlugins();
+    }
+
+    public void checkExternalPlugins() {
+        checkPlaceholderAPI();
+        checkVault();
+    }
+
+    public void checkPlaceholderAPI() {
         if (pluginManager.isPluginEnabled("PlaceholderAPI")) {
             new PAPIPlaceholders(this).register();
         } else {
             logger.warning(ChatColor.RED + "PlaceholderAPI is not installed. You should check it out.");
         }
+    }
+
+    public void checkVault() {
         if (pluginManager.isPluginEnabled("Vault")) {
             vaultManager = new VaultManager(this);
         } else {
             logger.warning(ChatColor.RED + "Vault is not installed. Some features may not work.");
         }
-
-        announcementManager = new AnnouncementManager(this);
     }
 
     private void registerCommands() {
@@ -341,14 +359,13 @@ public class SST extends JavaPlugin {
     public void reload(boolean first) {
         long start = System.currentTimeMillis();
         logger.info(ChatColor.GREEN + "Reloading configurations from disk...");
+
         reloadConfig();
         checkAndLoadPacketListener();
+
         placeholderManager.load();
-        if (Utils.getBoolean("convert-enabled")) {
-            converterManager = new ConverterManager(this);
-        } else {
-            converterManager = null;
-        }
+        converterManager = Utils.getBoolean("convert-enabled") ? new ConverterManager(this) : null;
+
         if (!first) {
             languageManager.loadLanguage();
             announcementManager.reload();
@@ -360,13 +377,16 @@ public class SST extends JavaPlugin {
             maintenanceManager.reload();
             rulesManager.reloadRules();
             homeManager.reload();
+
             if (Utils.getBoolean("auto-save-users")) {
                 if (asyncUserSaveThread == null) asyncUserSaveThread = new AsyncUserSaveThread(this);
             } else if (asyncUserSaveThread != null) {
                 asyncUserSaveThread.cancel();
             }
-            logger.log(Level.INFO, ChatColor.GREEN + "Reloading is done, enjoy! " + ChatColor.AQUA + "{0} ms", System.currentTimeMillis() - start);
+
+            logger.log(Level.INFO, ChatColor.GREEN + "Reloading is done, enjoy! " + ChatColor.AQUA + Utils.took(start));
         }
+
     }
 
 }

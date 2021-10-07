@@ -42,6 +42,14 @@ public class Utils {
 
     private static final boolean isPAPIEnabled = Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
 
+    public static String took(long from) {
+        return tookThisLong(from) + "ms";
+    }
+
+    public static long tookThisLong(long from) {
+        return System.currentTimeMillis() - from;
+    }
+
     public static void noPermission(CommandSender sender) {
         sender.sendMessage(getMessage("no-permission", sender));
     }

@@ -6,12 +6,12 @@
 
     <groupId>io.github.bilektugrul</groupId>
     <artifactId>simpleservertools</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <packaging>jar</packaging>
 
     <name>SimpleServerTools</name>
-
     <description>Basic server tools plugin for Spigot/Paper 1.8.8+</description>
+
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
