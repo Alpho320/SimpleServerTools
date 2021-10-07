@@ -15,15 +15,15 @@ import java.util.WeakHashMap;
 
 public class SetWarpCommand implements CommandExecutor {
 
-    private final SST plugin;
-    private final WarpManager warpManager;
+    private final @NotNull SST plugin;
+    private final @NotNull WarpManager warpManager;
 
-    public SetWarpCommand(SST plugin) {
+    public SetWarpCommand(@NotNull SST plugin) {
         this.plugin = plugin;
         this.warpManager = plugin.getWarpManager();
     }
 
-    private final WeakHashMap<String, String> forceCreateList = new WeakHashMap<>();
+    private final @NotNull WeakHashMap<String, String> forceCreateList = new WeakHashMap<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

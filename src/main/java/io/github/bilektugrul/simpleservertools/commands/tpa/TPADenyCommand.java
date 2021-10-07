@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class TPADenyCommand implements CommandExecutor {
 
-    private final TPAManager tpaManager;
+    private final @NotNull TPAManager tpaManager;
 
-    public TPADenyCommand(SST plugin) {
+    public TPADenyCommand(@NotNull SST plugin) {
         this.tpaManager = plugin.getTPAManager();
     }
 

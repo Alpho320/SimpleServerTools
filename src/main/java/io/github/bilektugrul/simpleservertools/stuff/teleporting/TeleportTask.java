@@ -11,27 +11,30 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 public class TeleportTask extends BukkitRunnable {
 
-    private final TeleportManager teleportManager;
+    private final @NotNull TeleportManager teleportManager;
 
-    private final Player player;
-    private final User user;
+    private final @NotNull Player player;
+    private final @NotNull User user;
 
     private final boolean isStaff;
     private final double firstHealth;
-    private final TeleportSettings settings;
-    private final MessageType teleportingMode, teleportedMode;
-    private final Location firstLoc, finalLoc;
-    private final TeleportMessage teleportingMessages, teleportedMessages;
+
+    private final @NotNull TeleportSettings settings;
+    private final @NotNull MessageType teleportingMode, teleportedMode;
+    private final @NotNull Location firstLoc, finalLoc;
+    private final @NotNull TeleportMessage teleportingMessages, teleportedMessages;
+
     private int time;
 
-    private final CancelMode cancelMoveMode, cancelDamageMode;
-    private final TeleportMode teleportMode;
-    private final String mode;
+    private final @NotNull CancelMode cancelMoveMode, cancelDamageMode;
+    private final @NotNull TeleportMode teleportMode;
+    private final @NotNull String mode;
 
-    public TeleportTask(SST plugin, Player player, Location loc, TeleportMode teleportMode, TeleportSettings settings) {
+    public TeleportTask(SST plugin, @NotNull Player player, @NotNull Location loc, TeleportMode teleportMode, TeleportSettings settings) {
         this.teleportManager = plugin.getTeleportManager();
         this.player = player;
         this.user = plugin.getUserManager().getUser(player);

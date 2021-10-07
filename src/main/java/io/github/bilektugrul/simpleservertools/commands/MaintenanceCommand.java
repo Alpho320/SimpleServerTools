@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class MaintenanceCommand implements CommandExecutor {
 
-    private final MaintenanceManager maintenanceManager;
+    private final @NotNull MaintenanceManager maintenanceManager;
 
-    public MaintenanceCommand(SST plugin) {
+    public MaintenanceCommand(@NotNull SST plugin) {
         this.maintenanceManager = plugin.getMaintenanceManager();
     }
 

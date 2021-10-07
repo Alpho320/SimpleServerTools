@@ -11,9 +11,9 @@ import java.io.IOException;
 
 public class SSTCommand implements CommandExecutor {
 
-    private final SST plugin;
+    private final @NotNull SST plugin;
 
-    public SSTCommand(SST plugin) {
+    public SSTCommand(@NotNull SST plugin) {
         this.plugin = plugin;
     }
 

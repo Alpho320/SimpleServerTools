@@ -17,14 +17,14 @@ import java.util.regex.Pattern;
 
 public class SkullCommand implements CommandExecutor {
 
-    private final SST plugin;
+    private final @NotNull SST plugin;
 
-    public SkullCommand(SST plugin) {
+    public SkullCommand(@NotNull SST plugin) {
         this.plugin = plugin;
     }
 
-    private final Pattern NAME_PATTERN = Pattern.compile("^[A-Za-z0-9_]+$");
-    private final ItemStack SKULL_ITEM = ItemUtils.PLAYER_HEAD_ITEM;
+    private final @NotNull Pattern NAME_PATTERN = Pattern.compile("^[A-Za-z0-9_]+$");
+    private final @NotNull ItemStack SKULL_ITEM = ItemUtils.PLAYER_HEAD_ITEM;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

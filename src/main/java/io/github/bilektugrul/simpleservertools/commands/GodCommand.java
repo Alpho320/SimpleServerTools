@@ -13,9 +13,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class GodCommand implements CommandExecutor {
 
-    private final UserManager userManager;
+    private final @NotNull UserManager userManager;
 
-    public GodCommand(SST plugin) {
+    public GodCommand(@NotNull SST plugin) {
         this.userManager = plugin.getUserManager();
     }
 

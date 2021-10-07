@@ -9,9 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class RulesCommand implements CommandExecutor {
 
-    private final RulesManager rulesManager;
+    private final @NotNull RulesManager rulesManager;
 
-    public RulesCommand(SST plugin) {
+    public RulesCommand(@NotNull SST plugin) {
         this.rulesManager = plugin.getRulesManager();
     }
 

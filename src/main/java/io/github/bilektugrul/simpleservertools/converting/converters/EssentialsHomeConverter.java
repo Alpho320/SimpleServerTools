@@ -13,6 +13,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,11 +25,11 @@ import java.util.logging.Logger;
 
 public class EssentialsHomeConverter extends Converter {
 
-    private final SST plugin;
-    private final UserManager userManager;
-    private final MaintenanceManager maintenanceManager;
+    private final @NotNull SST plugin;
+    private final @NotNull UserManager userManager;
+    private final @NotNull MaintenanceManager maintenanceManager;
 
-    public EssentialsHomeConverter(SST plugin) {
+    public EssentialsHomeConverter(@NotNull SST plugin) {
         this.plugin = plugin;
         this.userManager = plugin.getUserManager();
         this.maintenanceManager = plugin.getMaintenanceManager();

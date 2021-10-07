@@ -6,6 +6,7 @@ import io.github.bilektugrul.simpleservertools.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,34 +19,37 @@ import java.util.stream.Collectors;
 
 public class User {
 
-    private final SST plugin;
-    private final UUID uuid;
-    private final String name;
-    private UserState state;
+    private final @NotNull SST plugin;
+    private final @NotNull UUID uuid;
+    private final @NotNull String name;
+    private @NotNull UserState state;
     private boolean isGod;
     private boolean isAfk;
-    private final YamlConfiguration data;
+    private final @NotNull YamlConfiguration data;
 
-    private final List<String> tpaBlockedPlayers = new ArrayList<>();
-    private final List<String> msgBlockedPlayers = new ArrayList<>();
-    private final Set<Home> homes = new HashSet<>();
+    private final @NotNull List<String> tpaBlockedPlayers = new ArrayList<>();
+    private final @NotNull List<String> msgBlockedPlayers = new ArrayList<>();
+    private final @NotNull Set<Home> homes = new HashSet<>();
 
-    public User(YamlConfiguration data, UUID uuid, String name, SST plugin) {
+    public User(YamlConfiguration data, @NotNull UUID uuid, @NotNull String name, @NotNull SST plugin) {
         this.data = data;
         this.uuid = uuid;
         this.name = name;
         this.state = UserState.PLAYING;
 
         data.set("lastKnownName", name);
+
         if (!data.contains("accepting-tpa")) data.set("accepting-tpa", true);
         if (!data.contains("accepting-msg")) data.set("accepting-msg", true);
+
         tpaBlockedPlayers.addAll(data.getStringList("tpa-blocked-players"));
         msgBlockedPlayers.addAll(data.getStringList("msg-blocked-players"));
+
         if (data.isConfigurationSection("homes")) {
-            for (String homeName : data.getConfigurationSection("homes").getKeys(false)) {
-                Home home = new Home(homeName, Utils.getLocation(data,"homes." + homeName + ".location"));
-                homes.add(home);
-            }
+            data.getConfigurationSection("homes").getKeys(false)
+                    .stream()
+                    .map(homeName -> new Home(homeName, Utils.getLocation(data, "homes." + homeName + ".location")))
+                    .forEach(homes::add);
         }
 
         this.plugin = plugin;
@@ -55,15 +59,15 @@ public class User {
         return uuid;
     }
 
-    public String getName() {
+    public @NotNull String getName() {
         return name;
     }
 
-    public UserState getState() {
+    public @NotNull UserState getState() {
         return state;
     }
 
-    public void setState(UserState newState) {
+    public void setState(@NotNull UserState newState) {
         state = newState;
     }
 
@@ -92,12 +96,10 @@ public class User {
     }
 
     public Home getHomeByName(String name) {
-        for (Home home : homes) {
-            if (home.name().equalsIgnoreCase(name)) {
-                return home;
-            }
-        }
-        return null;
+        return homes.stream()
+                .filter(home -> home.name().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 
     public boolean createHome(Home home) {
@@ -183,9 +185,8 @@ public class User {
     public void save() throws IOException {
         data.set("msg-blocked-players", msgBlockedPlayers);
         data.set("tpa-blocked-players", tpaBlockedPlayers);
-        for (Home home : homes) {
-            data.set("homes." + home.name() + ".location", home.location());
-        }
+        homes.forEach(home -> data.set("homes." + home.name() + ".location", home.location().clone()));
+
         data.save(new File(plugin.getDataFolder() + "/players/" + uuid + ".yml"));
     }
 

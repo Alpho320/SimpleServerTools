@@ -13,9 +13,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class SetHomeCommand implements CommandExecutor {
 
-    private final UserManager userManager;
+    private final @NotNull @NotNull UserManager userManager;
 
-    public SetHomeCommand(SST plugin) {
+    public SetHomeCommand(@NotNull SST plugin) {
         this.userManager = plugin.getUserManager();
     }
 

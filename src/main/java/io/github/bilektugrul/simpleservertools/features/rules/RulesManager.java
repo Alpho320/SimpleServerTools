@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import xyz.upperlevel.spigot.book.BookUtil;
 
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ import java.util.Locale;
 
 public class RulesManager {
 
-    private final SST plugin;
-    private FileConfiguration rulesFile;
+    private final @NotNull SST plugin;
+    private @NotNull FileConfiguration rulesFile;
 
     private int splitRulesEvery;
     double pageCount;
@@ -29,7 +30,7 @@ public class RulesManager {
     private String prefix;
     private String suffix;
 
-    public RulesManager(SST plugin) {
+    public RulesManager(@NotNull SST plugin) {
         this.plugin = plugin;
         reloadRules();
     }

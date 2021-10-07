@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class VanishCommand implements CommandExecutor {
 
-    private final VanishManager vanishManager;
+    private final @NotNull VanishManager vanishManager;
 
-    public VanishCommand(SST plugin) {
+    public VanishCommand(@NotNull SST plugin) {
         this.vanishManager = plugin.getVanishManager();
     }
 

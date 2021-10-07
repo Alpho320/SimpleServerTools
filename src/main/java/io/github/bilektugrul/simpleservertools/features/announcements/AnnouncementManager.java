@@ -3,18 +3,20 @@ package io.github.bilektugrul.simpleservertools.features.announcements;
 import io.github.bilektugrul.simpleservertools.SST;
 import me.despical.commons.configuration.ConfigUtils;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AnnouncementManager {
 
-    private final SST plugin;
-    private AsyncAnnouncementTask announcementTask;
-    private FileConfiguration announcementsFile;
-    private final List<Announcement> announcements = new ArrayList<>();
+    private final @NotNull SST plugin;
+    private @Nullable AsyncAnnouncementTask announcementTask;
+    private @Nullable FileConfiguration announcementsFile;
+    private final @NotNull List<Announcement> announcements = new ArrayList<>();
 
-    public AnnouncementManager(SST plugin) {
+    public AnnouncementManager(@NotNull SST plugin) {
         this.plugin = plugin;
         reload();
     }
@@ -24,7 +26,7 @@ public class AnnouncementManager {
         String start = "announcements.announcements";
         for (String key : announcementsFile.getConfigurationSection(start).getKeys(false)) {
             String full = start + "." + key + ".";
-            String type = announcementsFile.getString(full + "filter.type");
+            String type = announcementsFile.getString(full + "filter.type", "NONE");
             if (type.equalsIgnoreCase("GROUP")) {
                 String group = announcementsFile.getString(full + "filter.group");
                 String content = announcementsFile.getString(full + "content");
@@ -73,7 +75,7 @@ public class AnnouncementManager {
         return announcementsFile;
     }
 
-    public AsyncAnnouncementTask getAnnouncementTask() {
+    public @Nullable AsyncAnnouncementTask getAnnouncementTask() {
         return announcementTask;
     }
 

@@ -2,12 +2,13 @@ package io.github.bilektugrul.simpleservertools.features.spawn;
 
 import io.github.bilektugrul.simpleservertools.stuff.teleporting.TeleportSettings;
 import org.bukkit.Location;
+import org.jetbrains.annotations.NotNull;
 
 public class Spawn {
 
     private Location location;
     private final boolean permRequired;
-    private final TeleportSettings settings;
+    private final @NotNull TeleportSettings settings;
 
     public Spawn(Location location, boolean permRequired, TeleportSettings settings) {
         this.location = location;
@@ -23,7 +24,7 @@ public class Spawn {
         return permRequired;
     }
 
-    public TeleportSettings getSettings() {
+    public @NotNull TeleportSettings getSettings() {
         return settings;
     }
 

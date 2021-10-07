@@ -22,10 +22,10 @@ import java.util.stream.Collectors;
 
 public class WarpCommand implements CommandExecutor {
 
-    private final WarpManager warpManager;
-    private final TeleportManager teleportManager;
+    private final @NotNull WarpManager warpManager;
+    private final @NotNull TeleportManager teleportManager;
 
-    public WarpCommand(SST plugin) {
+    public WarpCommand(@NotNull SST plugin) {
         this.warpManager = plugin.getWarpManager();
         this.teleportManager = plugin.getTeleportManager();
         plugin.getCommand("warp").setTabCompleter(new WarpTabCompleter());

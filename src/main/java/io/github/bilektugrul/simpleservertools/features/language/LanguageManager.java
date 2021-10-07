@@ -4,6 +4,7 @@ import io.github.bilektugrul.simpleservertools.SST;
 import me.despical.commons.configuration.ConfigUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.Locale;
@@ -13,9 +14,9 @@ public class LanguageManager {
     private FileConfiguration language;
     private String languageString;
 
-    private final SST plugin;
+    private final @NotNull SST plugin;
 
-    public LanguageManager(SST plugin) {
+    public LanguageManager(@NotNull SST plugin) {
         this.plugin = plugin;
         loadLanguage();
     }

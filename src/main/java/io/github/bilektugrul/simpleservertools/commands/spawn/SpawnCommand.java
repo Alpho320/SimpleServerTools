@@ -17,10 +17,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class SpawnCommand implements CommandExecutor {
 
-    private final SpawnManager spawnManager;
-    private final TeleportManager teleportManager;
+    private final @NotNull SpawnManager spawnManager;
+    private final @NotNull TeleportManager teleportManager;
 
-    public SpawnCommand(SST plugin) {
+    public SpawnCommand(@NotNull SST plugin) {
         this.spawnManager = plugin.getSpawnManager();
         this.teleportManager = plugin.getTeleportManager();
     }

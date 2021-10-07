@@ -7,6 +7,8 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,17 +16,17 @@ import java.util.Random;
 
 public class AsyncAnnouncementTask extends BukkitRunnable {
 
-    private final AnnouncementManager announcementManager;
-    private VaultManager vaultManager = null;
-    private final SST plugin;
-    private final AnnouncementMode mode;
+    private final @NotNull AnnouncementManager announcementManager;
+    private @Nullable VaultManager vaultManager = null;
+    private final @NotNull SST plugin;
+    private final @NotNull AnnouncementMode mode;
     private int next = 0;
 
     private boolean started = false;
 
-    private final List<Announcement> list;
+    private final @NotNull List<Announcement> list;
 
-    public AsyncAnnouncementTask(AnnouncementManager announcementManager, SST plugin, AnnouncementMode mode) {
+    public AsyncAnnouncementTask(@NotNull AnnouncementManager announcementManager, SST plugin, @NotNull AnnouncementMode mode) {
         this.announcementManager = announcementManager;
         if (plugin.isPermManagerReady()) {
             this.vaultManager = plugin.getVaultManager();
@@ -39,7 +41,7 @@ public class AsyncAnnouncementTask extends BukkitRunnable {
     public void start() {
         plugin.getLogger().info("Async announcement thread starting...");
         started = true;
-        int i = announcementManager.getAnnouncementsFile().getInt("announcements.time");
+        int i = announcementManager.getAnnouncementsFile().getInt("announcements.time", 120);
         long time = i * 20L;
         runTaskTimerAsynchronously(plugin, time, time);
     }

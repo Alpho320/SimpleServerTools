@@ -9,6 +9,7 @@ import me.despical.commons.serializer.LocationSerializer;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,12 @@ import java.util.stream.Collectors;
 
 public class WarpManager {
 
-    private final ArrayList<Warp> warpList = new ArrayList<>();
-    private final SST plugin;
+    private final @NotNull ArrayList<Warp> warpList = new ArrayList<>();
+    private final @NotNull SST plugin;
     private FileConfiguration warpsFile;
     private TeleportSettings settings;
 
-    public WarpManager(SST plugin) {
+    public WarpManager(@NotNull SST plugin) {
         this.plugin = plugin;
         reloadWarps();
         loadSettings();
@@ -173,10 +174,19 @@ public class WarpManager {
 
     public void loadWarps() {
         warpList.clear();
-        for (String name : warpsFile.getConfigurationSection("warps").getKeys(false)) {
-            boolean permRequired = warpsFile.getBoolean("warps." + name + ".permissionRequired");
-            Location location = (Location) warpsFile.get("warps." + name + ".location");
-            warpList.add(new Warp(name, location, permRequired));
+
+        if (warpsFile.isConfigurationSection("warps")) {
+            warpsFile.getConfigurationSection("warps").getKeys(false)
+                    .stream()
+                    .map(
+                            name -> new Warp(
+                                    name,
+                                    (Location) warpsFile.get("warps." + name + ".location"),
+                                    warpsFile.getBoolean("warps." + name + ".permissionRequired")
+                            )
+                    ).forEach(warpList::add);
+        } else {
+            plugin.getLogger().warning("0 Warp found!");
         }
     }
 

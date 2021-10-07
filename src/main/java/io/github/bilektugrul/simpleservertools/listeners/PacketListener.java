@@ -10,6 +10,7 @@ import io.github.bilektugrul.simpleservertools.SST;
 import io.github.bilektugrul.simpleservertools.features.vanish.VanishManager;
 import io.github.bilektugrul.simpleservertools.utils.Utils;
 import org.bukkit.ChatColor;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,10 +19,10 @@ import java.util.UUID;
 
 public class PacketListener extends PacketAdapter {
 
-    private final SST plugin;
-    private final VanishManager vanishManager;
+    private final @NotNull SST plugin;
+    private final @NotNull VanishManager vanishManager;
 
-    public PacketListener(SST plugin) {
+    public PacketListener(@NotNull SST plugin) {
         super(plugin, ListenerPriority.LOWEST, PacketType.Status.Server.SERVER_INFO);
         this.plugin = plugin;
         this.vanishManager = plugin.getVanishManager();

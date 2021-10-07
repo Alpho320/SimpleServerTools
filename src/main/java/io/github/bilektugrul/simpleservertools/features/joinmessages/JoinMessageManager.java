@@ -3,17 +3,19 @@ package io.github.bilektugrul.simpleservertools.features.joinmessages;
 import io.github.bilektugrul.simpleservertools.SST;
 import me.despical.commons.configuration.ConfigUtils;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class JoinMessageManager {
 
-    private FileConfiguration msgFile;
-    private final SST plugin;
-    private final List<JoinMessage> joinMessageList = new ArrayList<>();
+    private @Nullable FileConfiguration msgFile;
+    private final @NotNull SST plugin;
+    private final @NotNull List<JoinMessage> joinMessageList = new ArrayList<>();
 
-    public JoinMessageManager(SST plugin) {
+    public JoinMessageManager(@NotNull SST plugin) {
         this.plugin = plugin;
         reload();
     }
@@ -53,7 +55,7 @@ public class JoinMessageManager {
         load();
     }
 
-    public List<JoinMessage> getList() {
+    public @NotNull List<JoinMessage> getList() {
         return new ArrayList<>(joinMessageList);
     }
 

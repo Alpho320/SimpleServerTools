@@ -45,9 +45,8 @@ public class HomeManager {
     }
 
     public TeleportSettings getSettings() {
-        if (settings == null) {
-            loadSettings();
-        }
+        if (settings == null) loadSettings();
+
         return settings;
     }
 

@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -56,12 +57,12 @@ public final class UpdateChecker {
     };
 
     private static UpdateChecker instance;
-    private final JavaPlugin plugin;
-    private final int pluginID;
-    private final VersionScheme versionScheme;
+    private final @NotNull JavaPlugin plugin;
+    private final @NotNull int pluginID;
+    private final @NotNull VersionScheme versionScheme;
     private UpdateResult lastResult = null;
 
-    private UpdateChecker(JavaPlugin plugin, int pluginID, VersionScheme versionScheme) {
+    private UpdateChecker(@NotNull JavaPlugin plugin, int pluginID, @NotNull VersionScheme versionScheme) {
         this.plugin = plugin;
         this.pluginID = pluginID;
         this.versionScheme = versionScheme;
@@ -260,8 +261,8 @@ public final class UpdateChecker {
      */
     public final class UpdateResult {
 
-        private final UpdateReason reason;
-        private final String newestVersion;
+        private final @NotNull UpdateReason reason;
+        private final @NotNull String newestVersion;
 
         { // An actual use for initializer blocks. This is madness!
             UpdateChecker.this.lastResult = this;

@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -36,9 +37,9 @@ import java.util.zip.GZIPOutputStream;
 
 public class Metrics {
 
-    private final Plugin plugin;
+    private final @NotNull Plugin plugin;
 
-    private final MetricsBase metricsBase;
+    private final @NotNull MetricsBase metricsBase;
 
     /**
      * Creates a new Metrics instance.
@@ -148,33 +149,33 @@ public class Metrics {
 
         private static final String REPORT_URL = "https://bStats.org/api/v2/data/%s";
 
-        private final String platform;
+        private final @NotNull String platform;
 
-        private final String serverUuid;
+        private final @NotNull String serverUuid;
 
-        private final int serviceId;
+        private final @NotNull int serviceId;
 
-        private final Consumer<JsonObjectBuilder> appendPlatformDataConsumer;
+        private final @NotNull Consumer<JsonObjectBuilder> appendPlatformDataConsumer;
 
-        private final Consumer<JsonObjectBuilder> appendServiceDataConsumer;
+        private final @NotNull Consumer<JsonObjectBuilder> appendServiceDataConsumer;
 
-        private final Consumer<Runnable> submitTaskConsumer;
+        private final @NotNull Consumer<Runnable> submitTaskConsumer;
 
-        private final Supplier<Boolean> checkServiceEnabledSupplier;
+        private final @NotNull Supplier<Boolean> checkServiceEnabledSupplier;
 
-        private final BiConsumer<String, Throwable> errorLogger;
+        private final @NotNull BiConsumer<String, Throwable> errorLogger;
 
-        private final Consumer<String> infoLogger;
+        private final @NotNull Consumer<String> infoLogger;
 
-        private final boolean logErrors;
+        private final @NotNull boolean logErrors;
 
-        private final boolean logSentData;
+        private final @NotNull boolean logSentData;
 
-        private final boolean logResponseStatusText;
+        private final @NotNull boolean logResponseStatusText;
 
-        private final Set<CustomChart> customCharts = new HashSet<>();
+        private final @NotNull Set<CustomChart> customCharts = new HashSet<>();
 
-        private final boolean enabled;
+        private final @NotNull boolean enabled;
 
         /**
          * Creates a new MetricsBase class instance.
@@ -364,7 +365,7 @@ public class Metrics {
 
     public static class AdvancedBarChart extends CustomChart {
 
-        private final Callable<Map<String, int[]>> callable;
+        private final @NotNull Callable<Map<String, int[]>> callable;
 
         /**
          * Class constructor.
@@ -404,7 +405,7 @@ public class Metrics {
 
     public static class SimpleBarChart extends CustomChart {
 
-        private final Callable<Map<String, Integer>> callable;
+        private final @NotNull Callable<Map<String, Integer>> callable;
 
         /**
          * Class constructor.
@@ -434,7 +435,7 @@ public class Metrics {
 
     public static class MultiLineChart extends CustomChart {
 
-        private final Callable<Map<String, Integer>> callable;
+        private final @NotNull Callable<Map<String, Integer>> callable;
 
         /**
          * Class constructor.
@@ -474,7 +475,7 @@ public class Metrics {
 
     public static class AdvancedPie extends CustomChart {
 
-        private final Callable<Map<String, Integer>> callable;
+        private final @NotNull Callable<Map<String, Integer>> callable;
 
         /**
          * Class constructor.
@@ -514,7 +515,7 @@ public class Metrics {
 
     public abstract static class CustomChart {
 
-        private final String chartId;
+        private final @NotNull String chartId;
 
         protected CustomChart(String chartId) {
             if (chartId == null) {
@@ -548,7 +549,7 @@ public class Metrics {
 
     public static class SingleLineChart extends CustomChart {
 
-        private final Callable<Integer> callable;
+        private final @NotNull Callable<Integer> callable;
 
         /**
          * Class constructor.
@@ -574,7 +575,7 @@ public class Metrics {
 
     public static class SimplePie extends CustomChart {
 
-        private final Callable<String> callable;
+        private final @NotNull Callable<String> callable;
 
         /**
          * Class constructor.
@@ -600,7 +601,7 @@ public class Metrics {
 
     public static class DrilldownPie extends CustomChart {
 
-        private final Callable<Map<String, Map<String, Integer>>> callable;
+        private final @NotNull Callable<Map<String, Map<String, Integer>>> callable;
 
         /**
          * Class constructor.

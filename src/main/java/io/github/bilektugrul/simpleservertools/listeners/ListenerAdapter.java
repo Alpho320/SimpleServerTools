@@ -11,6 +11,7 @@ import io.github.bilektugrul.simpleservertools.features.warps.WarpManager;
 import io.github.bilektugrul.simpleservertools.users.UserManager;
 import io.github.bilektugrul.simpleservertools.utils.VaultManager;
 import org.bukkit.event.Listener;
+import org.jetbrains.annotations.NotNull;
 
 //TODO: separate listeners to multiple classes
 public class ListenerAdapter implements Listener {
@@ -26,7 +27,7 @@ public class ListenerAdapter implements Listener {
     protected final MaintenanceManager maintenanceManager;
     protected final HomeManager homeManager;
 
-    public ListenerAdapter(SST plugin) {
+    public ListenerAdapter(@NotNull SST plugin) {
         this.plugin = plugin;
         this.userManager = plugin.getUserManager();
         this.spawnManager = plugin.getSpawnManager();

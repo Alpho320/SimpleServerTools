@@ -252,7 +252,7 @@ public class SST extends JavaPlugin {
         }
     }
 
-    private final Set<String> disabledCommands = new HashSet<>();
+    private final @NotNull Set<String> disabledCommands = new HashSet<>();
 
     public void registerCommand(CommandExecutor executor, String command) {
         String className = executor.getClass().getName();

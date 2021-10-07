@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class AFKCommand implements CommandExecutor {
 
-    private final UserManager userManager;
+    private final @NotNull UserManager userManager;
 
-    public AFKCommand(SST plugin) {
+    public AFKCommand(@NotNull SST plugin) {
         this.userManager = plugin.getUserManager();
     }
 

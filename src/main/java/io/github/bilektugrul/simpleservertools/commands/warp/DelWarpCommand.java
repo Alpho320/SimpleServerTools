@@ -11,9 +11,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class DelWarpCommand implements CommandExecutor {
 
-    private final WarpManager warpManager;
+    private final @NotNull WarpManager warpManager;
 
-    public DelWarpCommand(SST plugin) {
+    public DelWarpCommand(@NotNull SST plugin) {
         this.warpManager = plugin.getWarpManager();
     }
 

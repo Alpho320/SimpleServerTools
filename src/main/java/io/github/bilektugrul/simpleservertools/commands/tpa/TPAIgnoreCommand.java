@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class TPAIgnoreCommand implements CommandExecutor {
 
-    private final UserManager userManager;
+    private final @NotNull UserManager userManager;
 
-    public TPAIgnoreCommand(SST plugin) {
+    public TPAIgnoreCommand(@NotNull SST plugin) {
         this.userManager = plugin.getUserManager();
     }
 

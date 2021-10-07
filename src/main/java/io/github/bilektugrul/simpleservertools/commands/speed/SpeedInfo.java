@@ -3,6 +3,7 @@ package io.github.bilektugrul.simpleservertools.commands.speed;
 import io.github.bilektugrul.simpleservertools.utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class SpeedInfo {
 
@@ -11,7 +12,7 @@ public class SpeedInfo {
     private float speed;
     private SpeedMode mode;
 
-    public SpeedInfo setExecutor(CommandSender executor) {
+    public @NotNull SpeedInfo setExecutor(CommandSender executor) {
         this.executor = executor;
         return this;
     }
@@ -24,17 +25,17 @@ public class SpeedInfo {
         return mode;
     }
 
-    public SpeedInfo setPlayer(Player player) {
+    public @NotNull SpeedInfo setPlayer(Player player) {
         this.player = player;
         return this;
     }
 
-    public SpeedInfo setMode(SpeedMode mode) {
+    public @NotNull SpeedInfo setMode(SpeedMode mode) {
         this.mode = mode;
         return this;
     }
 
-    public SpeedInfo setSpeed(String speed) {
+    public @NotNull SpeedInfo setSpeed(String speed) {
         float result = 0.2f;
         try {
             result = Float.parseFloat(speed);
@@ -44,7 +45,7 @@ public class SpeedInfo {
         return this;
     }
 
-    public SpeedMode matchMode() {
+    public @NotNull SpeedMode matchMode() {
         return player.isFlying() ? SpeedMode.FLY : SpeedMode.WALK;
     }
 

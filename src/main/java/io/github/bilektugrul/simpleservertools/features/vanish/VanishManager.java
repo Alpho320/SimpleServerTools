@@ -3,6 +3,7 @@ package io.github.bilektugrul.simpleservertools.features.vanish;
 import io.github.bilektugrul.simpleservertools.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,8 +11,8 @@ import java.util.UUID;
 
 public class VanishManager {
 
-    private final Set<UUID> vanishedPlayers = new HashSet<>();
-    private final Set<UUID> onlineVanishedPlayers = new HashSet<>();
+    private final @NotNull Set<UUID> vanishedPlayers = new HashSet<>();
+    private final @NotNull Set<UUID> onlineVanishedPlayers = new HashSet<>();
 
     public Set<UUID> getVanishedPlayers() {
         return new HashSet<>(vanishedPlayers);
@@ -38,17 +39,17 @@ public class VanishManager {
 
     public void showPlayer(Player player, boolean silent) {
         UUID uuid = player.getUniqueId();
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            if (!p.canSee(player)) { // To avoid more packets
-                p.showPlayer(player);
-            }
-        }
+
+        Bukkit.getOnlinePlayers().stream().filter(p -> !p.canSee(player)).forEach(p -> p.showPlayer(player));
         player.sendMessage(Utils.getMessage("vanish.disabled", player));
+
         vanishedPlayers.remove(uuid);
         onlineVanishedPlayers.remove(uuid);
+
         if (Utils.getBoolean("join-quit-messages.enabled", false)) {
             if (!silent) Bukkit.broadcastMessage(Utils.getString("join-quit-messages.join-message", player));
         }
+
     }
 
     public void toggleVanish(Player player, boolean silent) {

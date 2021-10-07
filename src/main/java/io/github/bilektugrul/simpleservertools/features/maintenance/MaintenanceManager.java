@@ -4,19 +4,20 @@ import io.github.bilektugrul.simpleservertools.SST;
 import io.github.bilektugrul.simpleservertools.utils.Utils;
 import me.despical.commons.configuration.ConfigUtils;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 public class MaintenanceManager {
 
-    private FileConfiguration maintenanceFile;
+    private @NotNull FileConfiguration maintenanceFile;
 
     private String reason;
     private String fullyClosedMessage;
     private boolean isInMaintenance;
     private boolean isFullyClosed;
 
-    private final SST plugin;
+    private final @NotNull SST plugin;
 
-    public MaintenanceManager(SST plugin) {
+    public MaintenanceManager(@NotNull SST plugin) {
         this.plugin = plugin;
         reload();
     }
@@ -65,7 +66,7 @@ public class MaintenanceManager {
         ConfigUtils.saveConfig(plugin, maintenanceFile, "maintenance");
     }
 
-    public FileConfiguration getMaintenanceFile() {
+    public @NotNull FileConfiguration getMaintenanceFile() {
         return maintenanceFile;
     }
 

@@ -11,6 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,10 +21,10 @@ import java.util.logging.Logger;
 
 public class CMIWarpConverter extends Converter {
 
-    private final SST plugin;
-    private final WarpManager warpManager;
+    private final @NotNull SST plugin;
+    private final @NotNull WarpManager warpManager;
 
-    public CMIWarpConverter(SST plugin) {
+    public CMIWarpConverter(@NotNull SST plugin) {
         this.plugin = plugin;
         this.warpManager = plugin.getWarpManager();
     }

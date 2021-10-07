@@ -3,17 +3,18 @@ package io.github.bilektugrul.simpleservertools;
 import io.github.bilektugrul.simpleservertools.users.UserManager;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
 public class AsyncUserSaveThread extends BukkitRunnable {
 
-    private final SST plugin;
-    private final Logger logger;
-    private final UserManager userManager;
+    private final @NotNull SST plugin;
+    private final @NotNull Logger logger;
+    private final @NotNull UserManager userManager;
 
-    public AsyncUserSaveThread(SST plugin) {
+    public AsyncUserSaveThread(@NotNull SST plugin) {
         this.plugin = plugin;
         this.logger = plugin.getLogger();
         this.userManager = plugin.getUserManager();

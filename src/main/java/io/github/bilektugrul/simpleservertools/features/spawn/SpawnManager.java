@@ -14,17 +14,18 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.logging.Level;
 
 public class SpawnManager {
 
     private Spawn spawn;
-    private final SST plugin;
-    private FileConfiguration spawnFile;
-    private final TeleportManager teleportManager;
+    private final @NotNull SST plugin;
+    private @NotNull FileConfiguration spawnFile;
+    private final @NotNull TeleportManager teleportManager;
 
-    public SpawnManager(SST plugin) {
+    public SpawnManager(@NotNull SST plugin) {
         this.plugin = plugin;
         this.teleportManager = plugin.getTeleportManager();
         reloadSpawn();
@@ -128,7 +129,7 @@ public class SpawnManager {
             sender.sendMessage(Utils.getMessage("spawn.not-enabled", sender));
     }
 
-    public FileConfiguration getSpawnFile() {
+    public @NotNull FileConfiguration getSpawnFile() {
         return spawnFile;
     }
 

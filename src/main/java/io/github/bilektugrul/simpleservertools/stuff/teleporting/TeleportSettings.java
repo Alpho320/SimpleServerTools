@@ -1,6 +1,7 @@
 package io.github.bilektugrul.simpleservertools.stuff.teleporting;
 
 import io.github.bilektugrul.simpleservertools.stuff.CancelMode;
+import org.jetbrains.annotations.NotNull;
 
 public class TeleportSettings {
 
@@ -8,52 +9,52 @@ public class TeleportSettings {
     private CancelMode cancelMoveMode, cancelDamageMode, cancelCommandsMode;
     private boolean blockMove, cancelTeleportOnMove, blockDamage, cancelTeleportOnDamage, staffBypassTime, blockCommands;
 
-    public TeleportSettings setTime(int time) {
+    public @NotNull TeleportSettings setTime(int time) {
         this.time = time;
         return this;
     }
 
-    public TeleportSettings setCancelMoveMode(CancelMode cancelMoveMode) {
+    public @NotNull TeleportSettings setCancelMoveMode(CancelMode cancelMoveMode) {
         this.cancelMoveMode = cancelMoveMode;
         return this;
     }
 
-    public TeleportSettings setCancelDamageMode(CancelMode cancelDamageMode) {
+    public @NotNull TeleportSettings setCancelDamageMode(CancelMode cancelDamageMode) {
         this.cancelDamageMode = cancelDamageMode;
         return this;
     }
 
-    public TeleportSettings setCancelCommandsMode(CancelMode cancelCommandsMode) {
+    public @NotNull TeleportSettings setCancelCommandsMode(CancelMode cancelCommandsMode) {
         this.cancelCommandsMode = cancelCommandsMode;
         return this;
     }
 
-    public TeleportSettings setBlockMove(boolean blockMove) {
+    public @NotNull TeleportSettings setBlockMove(boolean blockMove) {
         this.blockMove = blockMove;
         return this;
     }
 
-    public TeleportSettings setCancelTeleportOnMove(boolean cancelTeleportOnMove) {
+    public @NotNull TeleportSettings setCancelTeleportOnMove(boolean cancelTeleportOnMove) {
         this.cancelTeleportOnMove = cancelTeleportOnMove;
         return this;
     }
 
-    public TeleportSettings setBlockDamage(boolean blockDamage) {
+    public @NotNull TeleportSettings setBlockDamage(boolean blockDamage) {
         this.blockDamage = blockDamage;
         return this;
     }
 
-    public TeleportSettings setCancelTeleportOnDamage(boolean cancelTeleportOnDamage) {
+    public @NotNull TeleportSettings setCancelTeleportOnDamage(boolean cancelTeleportOnDamage) {
         this.cancelTeleportOnDamage = cancelTeleportOnDamage;
         return this;
     }
 
-    public TeleportSettings setStaffBypassTime(boolean staffBypassTime) {
+    public @NotNull TeleportSettings setStaffBypassTime(boolean staffBypassTime) {
         this.staffBypassTime = staffBypassTime;
         return this;
     }
 
-    public TeleportSettings setBlockCommands(boolean blockCommands) {
+    public @NotNull TeleportSettings setBlockCommands(boolean blockCommands) {
         this.blockCommands = blockCommands;
         return this;
     }
@@ -70,7 +71,7 @@ public class TeleportSettings {
         return cancelTeleportOnMove;
     }
 
-    public CancelMode getCancelMoveMode() {
+    public @NotNull CancelMode getCancelMoveMode() {
         return cancelMoveMode;
     }
 
@@ -82,7 +83,7 @@ public class TeleportSettings {
         return cancelTeleportOnDamage;
     }
 
-    public CancelMode getCancelDamageMode() {
+    public @NotNull CancelMode getCancelDamageMode() {
         return cancelDamageMode;
     }
 
@@ -94,7 +95,7 @@ public class TeleportSettings {
         return blockCommands;
     }
 
-    public CancelMode getCancelCommandsMode() {
+    public @NotNull CancelMode getCancelCommandsMode() {
         return cancelCommandsMode;
     }
 

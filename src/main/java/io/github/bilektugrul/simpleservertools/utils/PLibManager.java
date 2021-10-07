@@ -6,12 +6,13 @@ import io.github.bilektugrul.simpleservertools.SST;
 import io.github.bilektugrul.simpleservertools.listeners.PacketListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.jetbrains.annotations.NotNull;
 
 public class PLibManager {
 
     private static final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
 
-    public static void loadPacketListener(SST plugin) {
+    public static void loadPacketListener(@NotNull SST plugin) {
         if (Utils.getBoolean("vanish.remove-vanished-players", false) || Utils.getBoolean("one-more-slot.enabled", false)) {
             if (Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
                 manager.removePacketListeners(plugin);

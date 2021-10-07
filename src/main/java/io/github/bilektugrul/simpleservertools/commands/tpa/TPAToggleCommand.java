@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class TPAToggleCommand implements CommandExecutor {
 
-    private final UserManager userManager;
+    private final @NotNull UserManager userManager;
 
-    public TPAToggleCommand(SST plugin) {
+    public TPAToggleCommand(@NotNull SST plugin) {
         this.userManager = plugin.getUserManager();
     }
 

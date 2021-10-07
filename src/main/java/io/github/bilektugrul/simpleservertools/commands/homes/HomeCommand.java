@@ -18,11 +18,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class HomeCommand implements CommandExecutor {
 
-    private final UserManager userManager;
-    private final TeleportManager teleportManager;
-    private final HomeManager homeManager;
+    private final @NotNull @NotNull UserManager userManager;
+    private final @NotNull @NotNull TeleportManager teleportManager;
+    private final @NotNull @NotNull HomeManager homeManager;
 
-    public HomeCommand(SST plugin) {
+    public HomeCommand(@NotNull SST plugin) {
         this.userManager = plugin.getUserManager();
         this.teleportManager = plugin.getTeleportManager();
         this.homeManager = plugin.getHomeManager();

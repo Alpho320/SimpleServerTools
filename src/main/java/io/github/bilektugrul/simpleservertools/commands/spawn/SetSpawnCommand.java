@@ -13,9 +13,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class SetSpawnCommand implements CommandExecutor {
 
-    private final SpawnManager spawnManager;
+    private final @NotNull SpawnManager spawnManager;
 
-    public SetSpawnCommand(SST plugin) {
+    public SetSpawnCommand(@NotNull SST plugin) {
         this.spawnManager = plugin.getSpawnManager();
     }
 

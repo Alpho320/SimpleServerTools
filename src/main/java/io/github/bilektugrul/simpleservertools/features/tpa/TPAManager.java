@@ -9,6 +9,7 @@ import io.github.bilektugrul.simpleservertools.utils.Utils;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,11 +19,11 @@ import java.util.Set;
 public class TPAManager {
 
     private TeleportSettings settings;
-    private final Map<Player, Set<Player>> tpaList = new HashMap<>();
-    private final TeleportManager teleportManager;
-    private final SST plugin;
+    private final @NotNull Map<Player, Set<Player>> tpaList = new HashMap<>();
+    private final @NotNull TeleportManager teleportManager;
+    private final @NotNull SST plugin;
 
-    public TPAManager(SST plugin) {
+    public TPAManager(@NotNull SST plugin) {
         this.teleportManager = plugin.getTeleportManager();
         this.plugin = plugin;
         loadSettings();

@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class SocialSpyCommand implements CommandExecutor {
 
-    private final SpyManager spyManager;
+    private final @NotNull SpyManager spyManager;
 
-    public SocialSpyCommand(SST plugin) {
+    public SocialSpyCommand(@NotNull SST plugin) {
         this.spyManager = plugin.getSpyManager();
     }
 

@@ -3,16 +3,17 @@ package io.github.bilektugrul.simpleservertools.features.placeholders;
 import io.github.bilektugrul.simpleservertools.SST;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class CustomPlaceholderManager {
 
-    private final SST plugin;
-    private final Set<CustomPlaceholder> placeholderList = new HashSet<>();
+    private final @NotNull SST plugin;
+    private final @NotNull Set<CustomPlaceholder> placeholderList = new HashSet<>();
 
-    public CustomPlaceholderManager(SST plugin) {
+    public CustomPlaceholderManager(@NotNull SST plugin) {
         this.plugin = plugin;
         load();
     }
@@ -20,9 +21,14 @@ public class CustomPlaceholderManager {
     public void load() {
         placeholderList.clear();
         FileConfiguration config = plugin.getConfig();
-        for (String key : config.getConfigurationSection("custom-placeholders").getKeys(false)) {
-            CustomPlaceholder placeholder = new CustomPlaceholder(key, colored(config.getString("custom-placeholders." + key)));
-            placeholderList.add(placeholder);
+
+        if (config.isConfigurationSection("custom-placeholders")) {
+            config.getConfigurationSection("custom-placeholders").getKeys(false)
+                    .stream()
+                    .map(key -> new CustomPlaceholder(key, colored(config.getString("custom-placeholders." + key))))
+                    .forEach(placeholderList::add);
+        } else {
+            plugin.getLogger().warning("0 Custom placeholders found!");
         }
     }
 

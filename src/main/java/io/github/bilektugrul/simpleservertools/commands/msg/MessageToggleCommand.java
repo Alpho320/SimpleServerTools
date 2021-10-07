@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class MessageToggleCommand implements CommandExecutor {
 
-    private final UserManager userManager;
+    private final @NotNull UserManager userManager;
 
-    public MessageToggleCommand(SST plugin) {
+    public MessageToggleCommand(@NotNull SST plugin) {
         userManager = plugin.getUserManager();
     }
 

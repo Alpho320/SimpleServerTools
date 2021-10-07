@@ -4,13 +4,14 @@ import io.github.bilektugrul.simpleservertools.utils.Utils;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 public class GamemodeInfo {
 
-    public Player player;
-    public GameMode gameMode;
+    public @Nullable Player player;
+    public @Nullable GameMode gameMode;
 
-    public GamemodeInfo(Player player, GameMode gameMode) {
+    public GamemodeInfo(@Nullable Player player, @Nullable GameMode gameMode) {
         this.player = player;
         this.gameMode = gameMode;
     }
@@ -19,19 +20,19 @@ public class GamemodeInfo {
         this(null, null);
     }
 
-    public Player getPlayer() {
+    public @Nullable Player getPlayer() {
         return player;
     }
 
-    public GameMode getGameMode() {
+    public @Nullable GameMode getGameMode() {
         return gameMode;
     }
 
-    public void setGameMode(GameMode gameMode) {
+    public void setGameMode(@Nullable GameMode gameMode) {
         this.gameMode = gameMode;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(@Nullable Player player) {
         this.player = player;
     }
 

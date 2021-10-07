@@ -13,9 +13,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class DelHomeCommand implements CommandExecutor {
 
-    private final UserManager userManager;
+    private final @NotNull @NotNull UserManager userManager;
 
-    public DelHomeCommand(SST plugin) {
+    public DelHomeCommand(@NotNull SST plugin) {
         this.userManager = plugin.getUserManager();
     }
 

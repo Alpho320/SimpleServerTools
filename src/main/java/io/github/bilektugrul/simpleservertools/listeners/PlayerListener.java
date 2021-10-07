@@ -22,6 +22,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -30,7 +31,7 @@ import java.util.UUID;
 
 public class PlayerListener extends ListenerAdapter {
 
-    public PlayerListener(SST plugin) {
+    public PlayerListener(@NotNull SST plugin) {
         super(plugin);
     }
 
@@ -90,7 +91,7 @@ public class PlayerListener extends ListenerAdapter {
 
         if (!player.hasPermission("sst.staff")) {
             for (UUID vanished : vanishManager.getOnlineVanishedPlayers()) {
-                player.hidePlayer(Bukkit.getPlayer(vanished));
+                player.hidePlayer(Bukkit.getPlayer(vanished)); // TODO: 7.10.2021 null check
             }
         } else if (isVanished) {
             vanishManager.hidePlayer(player, true);

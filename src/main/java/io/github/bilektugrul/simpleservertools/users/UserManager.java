@@ -3,6 +3,8 @@ package io.github.bilektugrul.simpleservertools.users;
 import io.github.bilektugrul.simpleservertools.SST;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,10 +14,10 @@ import java.util.UUID;
 
 public class UserManager {
 
-    private final SST plugin;
-    private final Set<User> userList = new HashSet<>();
+    private final @NotNull SST plugin;
+    private final @NotNull Set<User> userList = new HashSet<>();
 
-    public UserManager(SST plugin) {
+    public UserManager(@NotNull SST plugin) {
         this.plugin = plugin;
     }
 
@@ -30,18 +32,16 @@ public class UserManager {
         return user;
     }
 
-    public User getUser(Player p) {
+    public @Nullable User getUser(Player p) {
         UUID uuid = p.getUniqueId();
         return getUser(uuid);
     }
 
-    public User getUser(UUID uuid) {
-        for (User user : userList) {
-            if (user.getUUID().equals(uuid)) {
-                return user;
-            }
-        }
-        return null;
+    public @Nullable User getUser(UUID uuid) {
+        return userList.stream()
+                .filter(user -> user.getUUID().equals(uuid))
+                .findFirst()
+                .orElse(null);
     }
 
     public boolean isTeleporting(User user) {
@@ -51,13 +51,10 @@ public class UserManager {
 
     public boolean isTeleporting(Player player) {
         User user = getUser(player);
-        if (user != null) {
-            return isTeleporting(user);
-        }
-        return false;
+        return user != null && isTeleporting(user);
     }
 
-    public Set<User> getUserList() {
+    public @NotNull Set<User> getUserList() {
         return new HashSet<>(userList);
     }
 

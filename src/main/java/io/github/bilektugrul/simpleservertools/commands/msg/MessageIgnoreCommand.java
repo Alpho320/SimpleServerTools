@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class MessageIgnoreCommand implements CommandExecutor {
 
-    private final UserManager userManager;
+    private final @NotNull UserManager userManager;
 
-    public MessageIgnoreCommand(SST plugin) {
+    public MessageIgnoreCommand(@NotNull SST plugin) {
         this.userManager = plugin.getUserManager();
     }
 

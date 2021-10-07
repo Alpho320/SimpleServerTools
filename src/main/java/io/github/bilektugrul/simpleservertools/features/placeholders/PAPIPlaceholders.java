@@ -12,12 +12,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class PAPIPlaceholders extends PlaceholderExpansion {
 
-    private final SST plugin;
-    private final CustomPlaceholderManager placeholderManager;
-    private final VanishManager vanishManager;
-    private final UserManager userManager;
+    private final @NotNull SST plugin;
+    private final @NotNull CustomPlaceholderManager placeholderManager;
+    private final @NotNull VanishManager vanishManager;
+    private final @NotNull UserManager userManager;
 
-    public PAPIPlaceholders(SST plugin) {
+    public PAPIPlaceholders(@NotNull SST plugin) {
         this.plugin = plugin;
         this.placeholderManager = plugin.getPlaceholderManager();
         this.vanishManager = plugin.getVanishManager();

@@ -17,13 +17,13 @@ import java.util.List;
 
 public class ConvertCommand implements CommandExecutor {
 
-    private final SST plugin;
+    private final @NotNull SST plugin;
 
-    public ConvertCommand(SST plugin) {
+    public ConvertCommand(@NotNull SST plugin) {
         this.plugin = plugin;
     }
 
-    private final List<String> timer = new ArrayList<>();
+    private final @NotNull List<String> timer = new ArrayList<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

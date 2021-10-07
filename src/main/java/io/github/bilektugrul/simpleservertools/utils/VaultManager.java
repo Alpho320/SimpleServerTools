@@ -3,13 +3,14 @@ package io.github.bilektugrul.simpleservertools.utils;
 import io.github.bilektugrul.simpleservertools.SST;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import org.jetbrains.annotations.NotNull;
 
 public class VaultManager {
 
-    private final SST plugin;
+    private final @NotNull SST plugin;
     private Permission permissionProvider;
 
-    public VaultManager(SST plugin) {
+    public VaultManager(@NotNull SST plugin) {
         this.plugin = plugin;
         setupPermissions();
     }

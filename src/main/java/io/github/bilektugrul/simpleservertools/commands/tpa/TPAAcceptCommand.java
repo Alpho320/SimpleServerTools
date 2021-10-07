@@ -16,10 +16,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class TPAAcceptCommand implements CommandExecutor {
 
-    private final TPAManager tpaManager;
-    private final UserManager userManager;
+    private final @NotNull TPAManager tpaManager;
+    private final @NotNull UserManager userManager;
 
-    public TPAAcceptCommand(SST plugin) {
+    public TPAAcceptCommand(@NotNull SST plugin) {
         this.tpaManager = plugin.getTPAManager();
         this.userManager = plugin.getUserManager();
     }

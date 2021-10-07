@@ -3,6 +3,7 @@ package io.github.bilektugrul.simpleservertools.features.spy;
 import io.github.bilektugrul.simpleservertools.utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class SpyManager {
 
-    private final List<Player> spies = new ArrayList<>();
+    private final @NotNull List<Player> spies = new ArrayList<>();
 
     public void toggleSpy(Player p, CommandSender from) {
         boolean isNotSame = !p.equals(from);

@@ -19,13 +19,13 @@ import java.util.UUID;
 
 public class MessageCommand implements CommandExecutor {
 
-    private final HashMap<String, String> replyMap = new HashMap<>();
+    private final @NotNull HashMap<String, String> replyMap = new HashMap<>();
 
-    private final UserManager userManager;
-    private final VanishManager vanishManager;
-    private final SpyManager spyManager;
+    private final @NotNull UserManager userManager;
+    private final @NotNull VanishManager vanishManager;
+    private final @NotNull SpyManager spyManager;
 
-    public MessageCommand(SST plugin) {
+    public MessageCommand(@NotNull SST plugin) {
         userManager = plugin.getUserManager();
         vanishManager = plugin.getVanishManager();
         spyManager = plugin.getSpyManager();

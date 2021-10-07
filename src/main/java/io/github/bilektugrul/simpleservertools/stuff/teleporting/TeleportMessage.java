@@ -3,16 +3,17 @@ package io.github.bilektugrul.simpleservertools.stuff.teleporting;
 import io.github.bilektugrul.simpleservertools.users.User;
 import io.github.bilektugrul.simpleservertools.utils.Utils;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class TeleportMessage {
 
-    private final MessageMode messageMode;
-    private final User user;
+    private final @NotNull MessageMode messageMode;
+    private final @NotNull User user;
 
     private String teleportingChat, teleportingActionBar, teleportedChat, teleportedActionBar;
     private String teleportingTitle, teleportingSub, teleportedTitle, teleportedSub;
 
-    public TeleportMessage(Player player, User user, String mode, MessageMode messageMode) {
+    public @NotNull TeleportMessage(Player player, @NotNull User user, String mode, @NotNull MessageMode messageMode) {
         this.messageMode = messageMode;
         this.user = user;
 
@@ -30,39 +31,39 @@ public class TeleportMessage {
 
     }
 
-    public String getTeleportingChat() {
+    public @NotNull String getTeleportingChat() {
         return teleportingChat;
     }
 
-    public String getTeleportingActionBar() {
+    public @NotNull String getTeleportingActionBar() {
         return teleportingActionBar;
     }
 
-    public String getTeleportedChat() {
+    public @NotNull String getTeleportedChat() {
         return teleportedChat;
     }
 
-    public String getTeleportedActionBar() {
+    public @NotNull String getTeleportedActionBar() {
         return teleportedActionBar;
     }
 
-    public String getTeleportingTitle() {
+    public @NotNull String getTeleportingTitle() {
         return teleportingTitle;
     }
 
-    public String getTeleportingSub() {
+    public @NotNull String getTeleportingSub() {
         return teleportingSub;
     }
 
-    public String getTeleportedTitle() {
+    public @NotNull String getTeleportedTitle() {
         return teleportedTitle;
     }
 
-    public String getTeleportedSub() {
+    public @NotNull String getTeleportedSub() {
         return teleportedSub;
     }
 
-    public MessageMode getMessageMode() {
+    public @NotNull MessageMode getMessageMode() {
         return messageMode;
     }
 
