@@ -27,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class PlayerListener extends ListenerAdapter {
@@ -90,9 +91,11 @@ public class PlayerListener extends ListenerAdapter {
         }
 
         if (!player.hasPermission("sst.staff")) {
-            for (UUID vanished : vanishManager.getOnlineVanishedPlayers()) {
-                player.hidePlayer(Bukkit.getPlayer(vanished)); // TODO: 7.10.2021 null check
-            }
+            vanishManager.getOnlineVanishedPlayers()
+                    .stream()
+                    .map(Bukkit::getPlayer)
+                    .filter(Objects::nonNull)
+                    .forEach(player::hidePlayer);
         } else if (isVanished) {
             vanishManager.hidePlayer(player, true);
         }
@@ -104,15 +107,17 @@ public class PlayerListener extends ListenerAdapter {
         Player player = e.getPlayer();
         UUID uuid = player.getUniqueId();
         User user = userManager.getUser(player);
-        user.save();
-        userManager.getUserList().remove(user);
+
+        if (user != null) {
+            user.save();
+            userManager.getUserList().remove(user);
+        }
 
         if (Utils.getBoolean("join-quit-messages.enabled", false)) {
             if (!vanishManager.isVanished(uuid)) e.setQuitMessage(Utils.getString("join-quit-messages.quit-message", player));
         }
 
         if (vanishManager.isVanished(uuid)) vanishManager.getOnlineVanishedPlayers().remove(uuid);
-
     }
 
     @EventHandler
@@ -124,7 +129,7 @@ public class PlayerListener extends ListenerAdapter {
 
         if (attackerEntity instanceof Player attackerPlayer) {
             User attackerUser = userManager.getUser(attackerPlayer);
-            if (!isVictimPlayer) {
+            if (!isVictimPlayer && attackerUser != null) {
                 e.setCancelled(attackerUser.isGod() || getCancelState(attackerUser));
             }
             return;
@@ -133,8 +138,9 @@ public class PlayerListener extends ListenerAdapter {
         if (!e.isCancelled() && isVictimPlayer) {
             Player victim = (Player) victimEntity;
             if (victim.isOnline()) { // NPC check
-                User victimUser = userManager.getUser(victim);
-                if (userManager.isTeleporting(victimUser)) {
+                User victimUser = userManager.getUser(victim, true);
+
+                if (victimUser != null && userManager.isTeleporting(victimUser)) {
                     e.setCancelled(getCancelState(victimUser));
                 }
             }
@@ -152,7 +158,7 @@ public class PlayerListener extends ListenerAdapter {
             }
             if (victimPlayer.isOnline()) { // NPC check
                 User user = userManager.getUser(victimPlayer);
-                e.setCancelled(user.isGod());
+                e.setCancelled(user != null && user.isGod());
             }
         }
     }
@@ -177,6 +183,8 @@ public class PlayerListener extends ListenerAdapter {
     public void onCommand(PlayerCommandPreprocessEvent e) {
         Player player = e.getPlayer();
         User user = userManager.getUser(player);
+        if (user == null) user = userManager.loadUser(player);
+
         TeleportSettings settings = getCurrentSettings(user);
 
         if (settings != null && settings.doesBlockCommands()) {

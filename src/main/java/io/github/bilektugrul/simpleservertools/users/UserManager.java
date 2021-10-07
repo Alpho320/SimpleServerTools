@@ -44,14 +44,22 @@ public class UserManager {
                 .orElse(null);
     }
 
+    public @Nullable User getUser(Player player, boolean load) {
+        return userList.stream()
+                .filter(user -> user.getUUID().equals(player.getUniqueId()))
+                .findFirst()
+                .orElse(load ? loadUser(player) : null);
+    }
+
     public boolean isTeleporting(User user) {
+        if (user == null) return false;
+
         UserState state = user.getState();
         return state == UserState.TELEPORTING_WARP || state == UserState.TELEPORTING_SPAWN || state == UserState.TELEPORTING_PLAYER || state == UserState.TELEPORTING_HOME;
     }
 
     public boolean isTeleporting(Player player) {
-        User user = getUser(player);
-        return user != null && isTeleporting(user);
+        return isTeleporting(getUser(player));
     }
 
     public @NotNull Set<User> getUserList() {
